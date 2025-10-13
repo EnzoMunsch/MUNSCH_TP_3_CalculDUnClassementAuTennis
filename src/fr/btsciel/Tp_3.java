@@ -6,9 +6,12 @@ public class Tp_3 {
     public static void main(String[] args) {
 
         //initialisation des variables
-        int joueurClassement;
-        int joueurCapital = 0;
-        int joueurVictoire = 0;
+        int playerRank;
+        int playerCapital = 0;
+        int playerVictory = 0;
+        int playerTotalVictory;
+        int playerVictoryRank;
+        int playerVictoryPoint;
         final int NC = 0;
         final int _40 = 1;
         final int _30 = 2;
@@ -17,9 +20,8 @@ public class Tp_3 {
         final int _30_3 = 5;
         final int _30_2 = 6;
         final int _30_1 = 7;
-        final int _15 = 8;
-        final int _15_5 = 9;
-        final int _15_4 = 10;
+        final int _15_5 = 8;
+        final int _15_4 = 9;
 
 
         //Tableau du classement
@@ -29,9 +31,8 @@ public class Tp_3 {
                 
                      0) Non classé    1) 40
                     
-                     2) 30           8) 15
-                    3) 30/5          9) 15/5
-                    4) 30/4         10) 15/4
+                     2) 30           8) 15/5
+                    4) 30/4          9) 15/4
                     5) 30/3
                     6) 30/2
                     7) 30/1
@@ -41,62 +42,87 @@ public class Tp_3 {
 
         //Demande du classement du joueur
         System.out.print("Entrez votre classement : ");
-        joueurClassement = In.readInteger();
+        playerRank = In.readInteger();
+        System.out.print("Entrez votre nombre de victoires : ");
+        playerTotalVictory = In.readInteger();
 
         //Indique le capital de depart
-        switch (joueurClassement) {
+        switch (playerRank) {
             case NC:
 
-                joueurVictoire = ;
-                joueurClassement = 0;
+                playerVictory = 5;
+                playerCapital = 0;
 
                 break;
             case _40:
 
-                joueurVictoire = ;
-                joueurClassement = 2;
+                playerVictory = 5;
+                playerCapital = 2;
 
                 break;
             case _30_5:
 
-                joueurVictoire = ;
-                joueurClassement = 5
-                ;
+                playerVictory = 5;
+                playerCapital = 5;
                 break;
             case _30_4:
 
-                joueurVictoire = ;
-                joueurClassement = 10;
+                playerVictory = 5;
+                playerCapital = 10;
 
                 break;
             case _30_3:
 
-                joueurVictoire = ;
-                joueurClassement = 20;
+                playerVictory = 6;
+                playerCapital = 20;
 
                 break;
             case _30_2:
 
-                joueurVictoire = ;
-                joueurClassement = 30;
+                playerVictory = 6;
+                playerCapital = 30;
 
                 break;
-            case _30_1
+            case _30_1:
+
+                playerVictory = 6;
+                playerCapital = 50;
 
                 break;
             case _30:
 
-                break;
-            case _15:
+                playerVictory = 6;
+                playerCapital = 80;
 
                 break;
             case _15_5:
 
+                playerVictory = 6;
+                playerCapital = 120;
+
                 break;
             case _15_4:
 
+                playerVictory = 6;
+                playerCapital = 160;
+
                 break;
         }
+        System.out.println("\nVous avez le droit a " + playerVictory + " victoires.\n");
+        System.out.println("""
+                
+                1) Victoire à 2 échelons au dessus et plus.
+                2) Victoire à 1 échelon au dessus.
+                3) Victoire à échelon égal.
+                4) Victoire à 1 échelon en dessous.
+                5) Victoire à 2 échelons en dessous.
+                6) Victoire à 3 échelons en dessous.
+                7) Victoire à 4 échelons en dessous et plus.
+                
+                """);
+        for (int i = 0; i == playerVictory; i++) {
+            System.out.println("Veuillez saisire vos victoires : ");
 
+        }
     }
 }
