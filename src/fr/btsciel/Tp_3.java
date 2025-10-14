@@ -23,7 +23,9 @@ public class Tp_3 {
         final int _30_1 = 7;
         final int _15_5 = 8;
         final int _15_4 = 9;
-        boolean upOrDown = false;
+        boolean rankDown = false;
+        boolean rankUp = false;
+        String rankName = "";
 
 
         //Tableau du classement
@@ -33,9 +35,9 @@ public class Tp_3 {
                 
                      0) Non classé    1) 40
                     
-                     2) 30           8) 15/5
-                    4) 30/4          9) 15/4
-                    5) 30/3
+                    2) 30/5          8) 30
+                    4) 30/4          9) 15/5
+                    5) 30/3          10) 15/4
                     6) 30/2
                     7) 30/1
                 
@@ -48,58 +50,64 @@ public class Tp_3 {
         System.out.print("Entrez votre nombre de victoires : ");
         playerTotalVictory = In.readInteger();
 
-        //Indique le capital de depart
-        switch (playerRank) {
-            case NC:
-                playerVictory = 5;
-                playerCapital = 0;
-                break;
-            case _40:
-                playerVictory = 5;
-                playerCapital = 2;
-                break;
-            case _30_5:
-                playerVictory = 5;
-                playerCapital = 5;
-                break;
-            case _30_4:
-                playerVictory = 5;
-                playerCapital = 10;
-                break;
-            case _30_3:
-                playerVictory = 6;
-                playerCapital = 20;
-                break;
-            case _30_2:
-                playerVictory = 6;
-                playerCapital = 30;
-                break;
-            case _30_1:
-                playerVictory = 6;
-                playerCapital = 50;
-                break;
-            case _30:
-                playerVictory = 6;
-                playerCapital = 80;
-                break;
-            case _15_5:
-                playerVictory = 6;
-                playerCapital = 120;
-                break;
-            case _15_4:
-                playerVictory = 6;
-                playerCapital = 160;
-                break;
+        //Association du nombre de victoire par rapport au rang du joueur.
+        if (playerRank > 4){
+            playerVictory = 6;
+        }else {
+            playerVictory = 5;
         }
-
-        playerGlobalPoint = playerCapital;
 
         //Eviter de lui demander plus de victoire qu'il n'en a reelement.
         if (playerVictory > playerTotalVictory) {
             playerVictory = playerTotalVictory;
         }
         System.out.println("\nVous avez le droit a " + playerVictory + " victoires.\n");
-        System.out.println("""
+
+
+        //Boucle de calcule du nouveau classement selon les victoires/defaites.
+        for (int i = 0; i != playerVictory; i++) {
+
+            //Indique le capital de depart
+            switch (playerRank) {
+                case NC:
+                    playerCapital = 0;
+                    break;
+                case _40:
+                    playerCapital = 2;
+                    break;
+                case _30_5:
+                    playerCapital = 5;
+                    break;
+                case _30_4:
+                    playerCapital = 10;
+                    break;
+                case _30_3:
+                    playerCapital = 20;
+                    break;
+                case _30_2:
+                    playerCapital = 30;
+                    break;
+                case _30_1:
+                    playerCapital = 50;
+                    break;
+                case _30:
+                    playerCapital = 80;
+                    break;
+                case _15_5:
+                    playerCapital = 120;
+                    break;
+                case _15_4:
+                    playerCapital = 160;
+                    break;
+            }
+
+            //Mise a jour des variable suite a une montée de rang.
+            if (rankUp = true){
+                playerGlobalPoint = playerCapital;
+                i = 0;
+            }
+            //menu des victoires par echelon
+            System.out.println("""
                 
                 1) Victoire à 2 échelons au dessus et plus.
                 2) Victoire à 1 échelon au dessus.
@@ -110,9 +118,8 @@ public class Tp_3 {
                 7) Victoire à 4 échelons en dessous et plus.
                 
                 """);
-        for (int i = 0; i == playerVictory; i++) {
 
-            System.out.println("Veuillez saisire une victoires : ");
+            System.out.print("Veuillez saisire une victoires : ");
             playerVictoryRank = In.readInteger();
             switch (playerVictoryRank) {
                 case 1:
@@ -150,6 +157,8 @@ public class Tp_3 {
 
                     if (playerGlobalPoint > 50) {
                         playerRank++;
+                        rankUp = true;
+                        rankName = "40";
                     }
 
                     break;
@@ -157,10 +166,12 @@ public class Tp_3 {
 
                     if (playerGlobalPoint > 80) {
                         playerRank++;
-                        upOrDown = true;
+                        rankUp = true;
+                        rankName = "30/5";
                     } else if (playerGlobalPoint < 30) {
                         playerRank--;
-                        upOrDown = true;
+                        rankDown = true;
+                        rankName = "NC";
                     }
 
                     break;
@@ -168,10 +179,12 @@ public class Tp_3 {
 
                     if (playerGlobalPoint > 150) {
                         playerRank++;
-                        upOrDown = true;
+                        rankUp = true;
+                        rankName = "30/4";
                     } else if (playerGlobalPoint < 50) {
                         playerRank--;
-                        upOrDown = true;
+                        rankDown = true;
+                        rankName = "40";
                     }
 
                     break;
@@ -179,10 +192,12 @@ public class Tp_3 {
 
                     if (playerGlobalPoint > 260) {
                         playerRank++;
-                        upOrDown = true;
+                        rankUp = true;
+                        rankName = "30/3";
                     } else if (playerGlobalPoint < 90) {
                         playerRank--;
-                        upOrDown = true;
+                        rankDown = true;
+                        rankName = "35/5";
                     }
 
                     break;
@@ -190,10 +205,12 @@ public class Tp_3 {
 
                     if (playerGlobalPoint > 340) {
                         playerRank++;
-                        upOrDown = true;
+                        rankUp = true;
+                        rankName = "30/2";
                     } else if (playerGlobalPoint < 145) {
                         playerRank--;
-                        upOrDown = true;
+                        rankDown = true;
+                        rankName = "30/4";
                     }
 
                     break;
@@ -201,10 +218,12 @@ public class Tp_3 {
 
                     if (playerGlobalPoint > 410) {
                         playerRank++;
-                        upOrDown = true;
+                        rankUp = true;
+                        rankName = "30/1";
                     } else if (playerGlobalPoint < 205) {
                         playerRank--;
-                        upOrDown = true;
+                        rankDown = true;
+                        rankName = "30/3";
                     }
 
                     break;
@@ -212,10 +231,12 @@ public class Tp_3 {
 
                     if (playerGlobalPoint > 480) {
                         playerRank++;
-                        upOrDown = true;
+                        rankUp = true;
+                        rankName = "30";
                     } else if (playerGlobalPoint < 245) {
                         playerRank--;
-                        upOrDown = true;
+                        rankDown = true;
+                        rankName = "30/2";
                     }
 
                     break;
@@ -223,10 +244,12 @@ public class Tp_3 {
 
                     if (playerGlobalPoint > 510) {
                         playerRank++;
-                        upOrDown = true;
+                        rankUp = true;
+                        rankName = "15/5";
                     } else if (playerGlobalPoint < 290) {
                         playerRank--;
-                        upOrDown = true;
+                        rankDown = true;
+                        rankName = "30/5";
                     }
 
                     break;
@@ -234,28 +257,32 @@ public class Tp_3 {
 
                     if (playerGlobalPoint > 580) {
                         playerRank++;
-                        upOrDown = true;
+                        rankUp = true;
+                        rankName = "15/4";
                     } else if (playerGlobalPoint < 325) {
                         playerRank--;
-                        upOrDown = true;
+                        rankDown = true;
+                        rankName = "30";
                     }
 
                     break;
                 case _15_4:
 
                     if (playerGlobalPoint > 660) {
-                        playerRank++;
-                        upOrDown = true;
+                        rankName = "rang max";
                     } else if (playerGlobalPoint < 395) {
                         playerRank--;
-                        upOrDown = true;
+                        rankDown = true;
+                        rankName = "15/5";
                     }
 
                     break;
             }
-            if (upOrDown == true){
-
-                }
+            if (rankUp == true){
+                System.out.println("\nFélicitation, vous passez au rang supperieur !\nVeuillez de nouveau rentrer vos victoires en prenant en compte votre nouveau rang. (" + rankName + ")");
+            }else if (rankDown == true){
+                System.out.println("Vous baissez d'un rang.");
+            }
 
         }
     }
