@@ -1,0 +1,162 @@
+package fr.btsciel;
+
+import clavier.In;
+
+public class Tp_3 {
+    public static void main(String[] args) {
+
+        //initialisation des variables
+        int playerRank;
+        int playerCapital = 0;
+        int playerVictory = 0;
+        int playerTotalVictory = 0;
+        int playerVictoryRank = 0;
+        int playerVictoryPoint = 0;
+        int playerGlobalPoint = 0;
+        final int NC = 0;
+        final int _40 = 1;
+        final int _30 = 7;
+        final int _30_5 = 2;
+        final int _30_4 = 3;
+        final int _30_3 = 4;
+        final int _30_2 = 5;
+        final int _30_1 = 6;
+        final int _15_5 = 8;
+        final int _15_4 = 9;
+        boolean rankUp = false;
+        String rankName = "";
+
+
+        //Tableau du classement
+        System.out.println("""
+                
+                _____________CLASSEMENT_____________
+                
+                     0) Non classé    1) 40
+                    
+                    2) 30/5          7) 30
+                    3) 30/4          8) 15/5
+                    4) 30/3          9) 15/4
+                    5) 30/2
+                    6) 30/1
+                
+             """);
+
+
+        //Demande du classement du joueur
+        System.out.print("Entrez votre classement : ");
+        playerRank = In.readInteger();
+        System.out.print("Entrez votre nombre de victoires : ");
+        playerTotalVictory = In.readInteger();
+
+        //
+        playerGlobalPoint += Mth_Tp_3.capital(playerRank);
+
+        //Association du nombre de victoire par rapport au rang du joueur.
+        if (playerRank > 4){
+            playerVictory = 6;
+        }else {
+            playerVictory = 5;
+        }
+
+        //Eviter de lui demander plus de victoire qu'il n'en a reelement.
+        if (playerVictory > playerTotalVictory) {
+            playerVictory = playerTotalVictory;
+        }
+        System.out.println("\nVous avez le droit a " + playerVictory + " victoires.\n");
+
+
+        //Boucle de calcule du nouveau classement selon les victoires/defaites.
+        for (int i = 0; i != playerVictory; i++) {
+
+            //menu des victoires par echelon
+            System.out.println("""
+                
+                1) Victoire à 2 échelons au dessus et plus.
+                2) Victoire à 1 échelon au dessus.
+                3) Victoire à échelon égal.
+                4) Victoire à 1 échelon en dessous.
+                5) Victoire à 2 échelons en dessous.
+                6) Victoire à 3 échelons en dessous.
+                7) Victoire à 4 échelons en dessous et plus.
+                0) Aucune victoire à ajouter.
+                
+                """);
+
+            System.out.print("Veuillez saisire une victoires : ");
+            playerVictoryRank = In.readInteger();
+            playerGlobalPoint += Mth_Tp_3.victoryPoint(playerVictoryRank);
+
+
+            //Vérification de monté de rang.
+            rankUp = Mth_Tp_3.rankUp(playerRank, playerGlobalPoint);
+
+            if (rankUp == true){
+                System.out.println("\nFélicitation, vous passez au rang supperieur !\nVeuillez de nouveau rentrer vos victoires en prenant en compte votre nouveau rang. (" + rankName + ")");
+                //Indique le capital de depart
+                playerGlobalPoint = Mth_Tp_3.capital(playerRank);
+                System.out.println("Vous avez le droit a " + playerVictory + " victoires");
+                i = 0;
+                rankUp = false;
+            }
+
+        }
+        switch (playerRank) {
+            case _40:
+
+                if (playerGlobalPoint < 30) {
+                }
+
+                break;
+            case _30_5:
+
+                if (playerGlobalPoint < 50) {
+                }
+
+                break;
+            case _30_4:
+
+                if (playerGlobalPoint < 90) {
+                }
+
+                break;
+            case _30_3:
+
+                if (playerGlobalPoint < 145) {
+                }
+
+                break;
+            case _30_2:
+
+                if (playerGlobalPoint < 205) {
+                }
+
+                break;
+            case _30_1:
+
+                if (playerGlobalPoint < 245) {
+                }
+
+                break;
+            case _30:
+
+                if (playerGlobalPoint < 290) {
+                }
+
+                break;
+            case _15_5:
+
+                if (playerGlobalPoint < 325) {
+                }
+
+                break;
+            case _15_4:
+
+                if (playerGlobalPoint < 395) {
+                }
+
+                break;
+        }
+    }
+}
+
